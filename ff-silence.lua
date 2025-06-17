@@ -254,12 +254,14 @@ end
 ----------------------------------------------------------------
 -- default key binds
 mp.add_key_binding("ctrl+a", "toggle_active", toggle_active)
-mp.add_key_binding("alt++", "increase_speedup", function() change_speedup(1) end, {repeatable = true})
-mp.add_key_binding("alt+-", "decrease_speedup", function() change_speedup(-1) end, {repeatable = true})
-mp.add_key_binding("alt+*", "increase_silence_duration", function() change_silence_duration(1) end, {repeatable = true})
-mp.add_key_binding("alt+/", "decrease_silence_duration", function() change_silence_duration(-1) end, {repeatable = true})
-mp.add_key_binding("ctrl+*", "increase_silence_threshold", function() change_silence_threshold(1) end, {repeatable = true})
-mp.add_key_binding("ctrl+/", "decrease_silence_threshold", function() change_silence_threshold(-1) end, {repeatable = true})
+mp.add_key_binding("alt+KP_ADD", "increase_speedup", function() change_speedup(1) end, {repeatable = true})
+mp.add_key_binding("alt+KP_SUBTRACT", "decrease_speedup", function() change_speedup(-1) end, {repeatable = true})
+mp.add_key_binding("ctrl+KP_ADD", "increase_original_speed", function() change_original_speed(1) end, {repeatable = true})
+mp.add_key_binding("ctrl+KP_SUBTRACT", "decrease_original_speed", function() change_original_speed(-1) end, {repeatable = true})
+mp.add_key_binding("alt+KP_MULTIPLY", "increase_silence_duration", function() change_silence_duration(1) end, {repeatable = true})
+mp.add_key_binding("alt+KP_DIVIDE", "decrease_silence_duration", function() change_silence_duration(-1) end, {repeatable = true})
+mp.add_key_binding("ctrl+KP_MULTIPLY", "increase_silence_threshold", function() change_silence_threshold(1) end, {repeatable = true})
+mp.add_key_binding("ctrl+KP_DIVIDE", "decrease_silence_threshold", function() change_silence_threshold(-1) end, {repeatable = true})
 
 if options.enabled then
 	-- need to wait until file-loaded to get saved playback speed
