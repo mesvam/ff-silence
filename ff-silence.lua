@@ -104,8 +104,10 @@ function silence_listener(msg)
 	-- only process messages from the silencedetect filter
 	if not (
 		msg.prefix == "ffmpeg" and 
-		msg.level == "v" and 
-		string.find(msg.text, "silencedetect:")
+		msg.level == "v" and (
+			string.find(msg.text, "silencedetect:") or -- old libavfilter log format
+			string.find(msg.text, "silencedetect@ff-silence:") -- new libavfilter log format (v11.5.100)
+		)
 	) then
 		return
 	end
@@ -244,7 +246,8 @@ function reset()
 end
 
 function add_silencedetect_filter(threshold, duration)
-	mp.command(string.format("change-list af pre @ff-silence_silencedetect:lavfi=[silencedetect=n=%ddB:d=%s]", threshold, tostring(duration)))
+	-- name ffmpeg filter to find it more reliably in log messages
+	mp.command(string.format("change-list af pre @ff-silence_silencedetect:lavfi=[silencedetect@ff-silence=n=%ddB:d=%s]", threshold, tostring(duration)))
 end
 
 function remove_silencedetect_filter()
