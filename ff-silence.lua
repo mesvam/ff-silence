@@ -106,7 +106,7 @@ function silence_listener(msg)
 		msg.prefix == "ffmpeg" and 
 		msg.level == "v" and (
 			string.find(msg.text, "silencedetect:") or -- old libavfilter log format
-			string.find(msg.text, "silencedetect@ff-silence:") -- new libavfilter log format (v11.5.100)
+			string.find(msg.text, "silencedetect@ff%-silence:") -- new libavfilter log format (v11.5.100)
 		)
 	) then
 		return
